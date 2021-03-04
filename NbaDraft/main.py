@@ -5,21 +5,24 @@ pickList = []
 teamList = []
 playerList = []
 schoolList = []
+positionList = []
 
 # These will become the lists with the extracted data
 lists = [pickList,
          teamList,
          playerList,
-         schoolList]
+         schoolList,
+         positionList]
 
 lists = ESPNtop100.scrapeESPN('https://www.espn.com/nba/draft/bestavailable', lists)
 lists = ESPNtop100.scrapeESPN('https://www.espn.com/nba/draft/bestavailable/_/position/ovr/page/2', lists)
 lists = ESPNtop100.scrapeESPN('https://www.espn.com/nba/draft/bestavailable/_/position/ovr/page/3', lists)
 lists = ESPNtop100.scrapeESPN('https://www.espn.com/nba/draft/bestavailable/_/position/ovr/page/4', lists)
-print(lists)
-print(zip(*lists))
-for column in zip(*lists):
+
+formattedLists = lists[0:1]
+formattedLists.extend(lists[2:])
+
+for column in zip(*formattedLists):
     for n, elem in enumerate(column):
-        if n != 1:
-            print(elem,end=' ')
+        print(elem,end=' ')
     print()
